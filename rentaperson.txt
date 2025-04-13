@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHire - Find and Hire Skilled Service Providers</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4f46e5',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=professional%20service%20providers%20working%20in%20various%20settings%2C%20clean%20modern%20workspace%20with%20people%20of%20diverse%20professions%20including%20plumbers%2C%20electricians%2C%20personal%20trainers%2C%20and%20fun%20activity%20instructors%2C%20bright%20and%20airy%20environment%2C%20soft%20natural%20lighting%2C%20minimalist%20design&width=1920&height=800&seq=hero1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0.4) 100%);
+        }
+        .search-input:focus {
+            outline: none;
+        }
+        .category-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .category-slider {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4f46e5;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 5px;
+            background: #e5e7eb;
+            outline: none;
+        }
+        .custom-checkbox {
+            position: relative;
+            padding-left: 28px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 4px;
+        }
+        .custom-checkbox:hover input ~ .checkmark {
+            border-color: #4f46e5;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .custom-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #4f46e5;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+                <nav class="hidden md:flex ml-10 space-x-8">
+                    <a href="#" class="text-gray-900 font-medium hover:text-primary transition">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition">Services</a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition">How it Works</a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition">About Us</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hidden md:block text-gray-600 hover:text-primary transition">Login</a>
+                <a href="#" class="hidden md:block bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Sign Up</a>
+                <button class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+                    <i class="ri-menu-line ri-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative">
+        <div class="hero-overlay w-full h-full absolute inset-0"></div>
+        <div class="container mx-auto px-4 py-20 relative z-10">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Find Skilled Professionals For Any Task</h1>
+                <p class="text-lg text-gray-700 mb-8">Connect with verified service providers for professional, personal, or fun experiences. Book services that come to you.</p>
+                
+                <!-- Search Bar -->
+                <div class="bg-white p-4 rounded-lg shadow-lg mb-8">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-grow relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ri-search-line text-gray-400"></i>
+                            </div>
+                            <input type="text" class="search-input w-full pl-10 pr-4 py-3 border-none text-gray-700 bg-gray-50 rounded" placeholder="What service do you need?">
+                        </div>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ri-map-pin-line text-gray-400"></i>
+                            </div>
+                            <input type="text" class="search-input w-full md:w-48 pl-10 pr-4 py-3 border-none text-gray-700 bg-gray-50 rounded" placeholder="Location">
+                        </div>
+                        <button class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Search</button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="bg-white/80 hover:bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition">Plumbing</a>
+                    <a href="#" class="bg-white/80 hover:bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition">Electrical</a>
+                    <a href="#" class="bg-white/80 hover:bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition">Home Cleaning</a>
+                    <a href="#" class="bg-white/80 hover:bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition">Personal Training</a>
+                    <a href="#" class="bg-white/80 hover:bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition">Gaming Buddy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Tabs -->
+    <section class="py-10 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1 bg-gray-100 rounded-full">
+                    <button class="px-6 py-2 rounded-full bg-primary text-white font-medium whitespace-nowrap">All Services</button>
+                    <button class="px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-200 whitespace-nowrap">Professional</button>
+                    <button class="px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-200 whitespace-nowrap">Personal</button>
+                    <button class="px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-200 whitespace-nowrap">Fun Buddy</button>
+                </div>
+            </div>
+
+            <!-- Featured Service Providers -->
+            <div class="mb-12">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Featured Service Providers</h2>
+                    <a href="#" class="text-primary font-medium flex items-center">
+                        View all
+                        <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Provider Card 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                        <div class="relative">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20male%20electrician%20in%20work%20clothes%20with%20tools%2C%20mid%2030s%2C%20confident%20pose%2C%20neutral%20background%2C%20high%20quality%20professional%20portrait&width=400&height=300&seq=elec1&orientation=landscape" alt="Electrician" class="w-full h-48 object-cover object-top">
+                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-primary">
+                                Professional
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center mb-3">
+                                <img src="https://readdy.ai/api/search-image?query=headshot%20portrait%20of%20professional%20male%20electrician%2C%20mid%2030s%2C%20confident%20smile%2C%20neutral%20background&width=100&height=100&seq=elec1p&orientation=squarish" alt="Profile" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Robert Johnson</h3>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-half-fill text-yellow-400"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600 ml-1">(128)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-3">Licensed electrician with 10+ years experience in residential and commercial installations.</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center text-gray-600">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">New York, NY</span>
+                                </div>
+                                <div class="font-semibold text-gray-900">$65/hr</div>
+                            </div>
+                            <button class="w-full bg-primary text-white py-2 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider Card 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                        <div class="relative">
+                            <img src="https://readdy.ai/api/search-image?query=female%20personal%20trainer%20in%20athletic%20wear%20demonstrating%20exercise%2C%20late%2020s%2C%20fitness%20studio%20setting%2C%20professional%20portrait&width=400&height=300&seq=trainer1&orientation=landscape" alt="Personal Trainer" class="w-full h-48 object-cover object-top">
+                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-secondary">
+                                Personal
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center mb-3">
+                                <img src="https://readdy.ai/api/search-image?query=headshot%20portrait%20of%20female%20personal%20trainer%2C%20late%2020s%2C%20athletic%2C%20confident%20smile%2C%20neutral%20background&width=100&height=100&seq=trainer1p&orientation=squarish" alt="Profile" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Emily Rodriguez</h3>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600 ml-1">(95)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-3">Certified personal trainer specializing in strength training and weight loss programs.</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center text-gray-600">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Los Angeles, CA</span>
+                                </div>
+                                <div class="font-semibold text-gray-900">$55/hr</div>
+                            </div>
+                            <button class="w-full bg-primary text-white py-2 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider Card 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                        <div class="relative">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20chef%20in%20kitchen%20preparing%20food%2C%20mid%2040s%2C%20wearing%20chef%20coat%2C%20cooking%20demonstration%2C%20professional%20portrait&width=400&height=300&seq=chef1&orientation=landscape" alt="Private Chef" class="w-full h-48 object-cover object-top">
+                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-secondary">
+                                Personal
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center mb-3">
+                                <img src="https://readdy.ai/api/search-image?query=headshot%20portrait%20of%20professional%20chef%2C%20mid%2040s%2C%20confident%20smile%2C%20wearing%20chef%20coat%2C%20neutral%20background&width=100&height=100&seq=chef1p&orientation=squarish" alt="Profile" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Michael Chen</h3>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-line text-yellow-400"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600 ml-1">(73)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-3">Private chef with expertise in Asian fusion, Italian, and French cuisine for intimate gatherings.</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center text-gray-600">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Chicago, IL</span>
+                                </div>
+                                <div class="font-semibold text-gray-900">$120/hr</div>
+                            </div>
+                            <button class="w-full bg-primary text-white py-2 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider Card 4 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                        <div class="relative">
+                            <img src="https://readdy.ai/api/search-image?query=young%20male%20gaming%20enthusiast%20with%20gaming%20setup%2C%20early%2020s%2C%20enthusiastic%20expression%2C%20gaming%20room%20with%20console%20and%20computer%2C%20professional%20portrait&width=400&height=300&seq=gamer1&orientation=landscape" alt="Gaming Buddy" class="w-full h-48 object-cover object-top">
+                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-purple-600">
+                                Fun Buddy
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center mb-3">
+                                <img src="https://readdy.ai/api/search-image?query=headshot%20portrait%20of%20young%20male%20gaming%20enthusiast%2C%20early%2020s%2C%20friendly%20smile%2C%20neutral%20background&width=100&height=100&seq=gamer1p&orientation=squarish" alt="Profile" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Tyler Williams</h3>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-fill text-yellow-400"></i>
+                                            <i class="ri-star-half-fill text-yellow-400"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600 ml-1">(41)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-3">Pro-level gamer available for coaching, co-op play, or just having fun in various popular games.</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center text-gray-600">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Seattle, WA</span>
+                                </div>
+                                <div class="font-semibold text-gray-900">$30/hr</div>
+                            </div>
+                            <button class="w-full bg-primary text-white py-2 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Sections -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <!-- Professional Services -->
+            <div class="mb-12">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg text-primary mr-3">
+                            <i class="ri-tools-fill ri-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Professional Services</h2>
+                    </div>
+                    <a href="#" class="text-primary font-medium flex items-center">
+                        View all
+                        <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="category-slider flex overflow-x-auto gap-5 pb-4">
+                    <!-- Service 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=plumber%20fixing%20sink%2C%20professional%20at%20work%2C%20detailed%20shot%20of%20hands%20working%20on%20plumbing%2C%20tools%20visible&width=280&height=160&seq=plumb1&orientation=landscape" alt="Plumbing" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Plumbing Services</h3>
+                            <p class="text-gray-600 text-sm mb-3">Repairs, installations, and emergency plumbing solutions</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $45/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Plumbers</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=electrician%20working%20on%20electrical%20panel%2C%20professional%20at%20work%2C%20detailed%20shot%20of%20hands%20working%20with%20wires%2C%20tools%20visible&width=280&height=160&seq=elec2&orientation=landscape" alt="Electrical" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Electrical Services</h3>
+                            <p class="text-gray-600 text-sm mb-3">Wiring, installations, repairs, and safety inspections</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $60/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Electricians</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=carpenter%20working%20on%20wooden%20furniture%2C%20professional%20at%20work%2C%20detailed%20shot%20of%20hands%20working%20with%20wood%2C%20tools%20visible&width=280&height=160&seq=carp1&orientation=landscape" alt="Carpentry" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Carpentry Services</h3>
+                            <p class="text-gray-600 text-sm mb-3">Custom furniture, repairs, installations, and woodwork</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $55/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Carpenters</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20house%20cleaner%20at%20work%2C%20cleaning%20living%20room%2C%20detailed%20shot%20of%20cleaning%20supplies%20and%20organized%20space&width=280&height=160&seq=clean1&orientation=landscape" alt="Cleaning" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Cleaning Services</h3>
+                            <p class="text-gray-600 text-sm mb-3">Regular, deep cleaning, and specialized cleaning services</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $35/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Cleaners</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=IT%20technician%20fixing%20computer%2C%20professional%20at%20work%2C%20detailed%20shot%20of%20hands%20working%20on%20computer%20hardware%2C%20tools%20visible&width=280&height=160&seq=it1&orientation=landscape" alt="IT Support" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">IT Support</h3>
+                            <p class="text-gray-600 text-sm mb-3">Computer repairs, network setup, and tech troubleshooting</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $70/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find IT Support</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personal Services -->
+            <div class="mb-12">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg text-secondary mr-3">
+                            <i class="ri-user-heart-fill ri-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Personal Services</h2>
+                    </div>
+                    <a href="#" class="text-primary font-medium flex items-center">
+                        View all
+                        <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="category-slider flex overflow-x-auto gap-5 pb-4">
+                    <!-- Service 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=personal%20fitness%20trainer%20helping%20client%20with%20workout%2C%20gym%20setting%2C%20detailed%20shot%20of%20training%20session&width=280&height=160&seq=fit1&orientation=landscape" alt="Fitness" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Personal Training</h3>
+                            <p class="text-gray-600 text-sm mb-3">Customized fitness programs and nutrition guidance</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $50/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Trainers</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=private%20tutor%20teaching%20student%2C%20educational%20setting%2C%20detailed%20shot%20of%20learning%20session%20with%20books%20and%20materials&width=280&height=160&seq=tutor1&orientation=landscape" alt="Tutoring" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Private Tutoring</h3>
+                            <p class="text-gray-600 text-sm mb-3">Academic support for all subjects and grade levels</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $40/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Tutors</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=private%20chef%20cooking%20in%20home%20kitchen%2C%20culinary%20setting%2C%20detailed%20shot%20of%20food%20preparation%20with%20ingredients&width=280&height=160&seq=chef2&orientation=landscape" alt="Chef" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Private Chef</h3>
+                            <p class="text-gray-600 text-sm mb-3">Personalized dining experiences in your home</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $100/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Chefs</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=massage%20therapist%20giving%20back%20massage%2C%20spa%20setting%2C%20detailed%20shot%20of%20massage%20therapy%20session&width=280&height=160&seq=massage1&orientation=landscape" alt="Massage" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Massage Therapy</h3>
+                            <p class="text-gray-600 text-sm mb-3">Relaxation and therapeutic massage services</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $80/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Therapists</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=life%20coach%20in%20consultation%20with%20client%2C%20professional%20setting%2C%20detailed%20shot%20of%20coaching%20session%20with%20notes&width=280&height=160&seq=coach1&orientation=landscape" alt="Coaching" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Life Coaching</h3>
+                            <p class="text-gray-600 text-sm mb-3">Goal setting, motivation, and personal development</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $90/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Coaches</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fun Buddy Services -->
+            <div class="mb-12">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-purple-100 rounded-lg text-purple-600 mr-3">
+                            <i class="ri-gamepad-fill ri-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Fun Buddy Services</h2>
+                    </div>
+                    <a href="#" class="text-primary font-medium flex items-center">
+                        View all
+                        <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="category-slider flex overflow-x-auto gap-5 pb-4">
+                    <!-- Service 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=gaming%20session%20with%20two%20people%20playing%20video%20games%2C%20entertainment%20setting%2C%20detailed%20shot%20of%20gaming%20setup&width=280&height=160&seq=game1&orientation=landscape" alt="Gaming" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Gaming Buddy</h3>
+                            <p class="text-gray-600 text-sm mb-3">Co-op gaming, coaching, and fun multiplayer sessions</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $25/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Gamers</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=local%20tour%20guide%20showing%20tourist%20city%20attractions%2C%20tourism%20setting%2C%20detailed%20shot%20of%20sightseeing%20experience&width=280&height=160&seq=tour1&orientation=landscape" alt="Tour Guide" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Local Tour Guide</h3>
+                            <p class="text-gray-600 text-sm mb-3">Personalized tours of local attractions and hidden gems</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $40/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Guides</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=hobby%20instructor%20teaching%20painting%20to%20student%2C%20art%20studio%20setting%2C%20detailed%20shot%20of%20creative%20session%20with%20art%20supplies&width=280&height=160&seq=art1&orientation=landscape" alt="Art Class" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Hobby Instructor</h3>
+                            <p class="text-gray-600 text-sm mb-3">Learn painting, music, crafts, and other creative skills</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $45/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Instructors</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=dance%20instructor%20teaching%20dance%20moves%2C%20dance%20studio%20setting%2C%20detailed%20shot%20of%20dance%20lesson&width=280&height=160&seq=dance1&orientation=landscape" alt="Dance" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Dance Partner</h3>
+                            <p class="text-gray-600 text-sm mb-3">Dance lessons, practice sessions, and event partners</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $35/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Dancers</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition min-w-[280px] max-w-[280px]">
+                        <img src="https://readdy.ai/api/search-image?query=board%20game%20session%20with%20people%20playing%20games%2C%20entertainment%20setting%2C%20detailed%20shot%20of%20tabletop%20gaming%20experience&width=280&height=160&seq=board1&orientation=landscape" alt="Board Games" class="w-full h-40 object-cover object-top">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Board Game Buddy</h3>
+                            <p class="text-gray-600 text-sm mb-3">Tabletop gaming sessions, teaching rules, and game nights</p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-900 font-medium">From $30/hr</div>
+                                <button class="bg-primary text-white text-sm px-4 py-1.5 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Find Gamers</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Filter System -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Find The Perfect Service Provider</h2>
+                    <p class="text-gray-600">Use our advanced filters to find exactly what you need, when you need it.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Service Category</label>
+                            <div class="relative">
+                                <select class="w-full bg-gray-50 border-none rounded px-4 py-3 pr-8 appearance-none text-gray-700">
+                                    <option value="">All Categories</option>
+                                    <option value="professional">Professional Services</option>
+                                    <option value="personal">Personal Services</option>
+                                    <option value="fun">Fun Buddy Services</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Location</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="ri-map-pin-line text-gray-400"></i>
+                                </div>
+                                <input type="text" class="search-input w-full pl-10 pr-4 py-3 border-none text-gray-700 bg-gray-50 rounded" placeholder="Enter your location">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Price Range</label>
+                        <div class="px-2">
+                            <input type="range" min="0" max="200" value="100" class="w-full">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>$0</span>
+                                <span>$50</span>
+                                <span>$100</span>
+                                <span>$150</span>
+                                <span>$200+</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Rating</label>
+                            <div class="flex items-center space-x-4">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="ml-2 flex items-center">
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-up text-yellow-400"></i>
+                                    </span>
+                                </label>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <span class="ml-2 flex items-center">
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-fill text-yellow-400"></i>
+                                        <i class="ri-star-up text-yellow-400"></i>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Distance</label>
+                            <div class="relative">
+                                <select class="w-full bg-gray-50 border-none rounded px-4 py-3 pr-8 appearance-none text-gray-700">
+                                    <option value="5">Within 5 miles</option>
+                                    <option value="10">Within 10 miles</option>
+                                    <option value="25" selected>Within 25 miles</option>
+                                    <option value="50">Within 50 miles</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Availability</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button class="py-2 px-4 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 whitespace-nowrap">Today</button>
+                            <button class="py-2 px-4 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 whitespace-nowrap">Tomorrow</button>
+                            <button class="py-2 px-4 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 whitespace-nowrap">This Week</button>
+                            <button class="py-2 px-4 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 whitespace-nowrap">Custom Date</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <label class="toggle-switch mr-2">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="text-gray-700">Instant Booking Only</span>
+                        </div>
+                        <button class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Search Providers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Become a Provider -->
+    <section class="py-16 bg-gradient-to-r from-indigo-600 to-blue-500">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center text-white">
+                <h2 class="text-3xl font-bold mb-4">Share Your Skills & Earn Money</h2>
+                <p class="text-xl opacity-90 mb-8">Join thousands of service providers who are earning by doing what they love. Register today and start getting hired!</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-left">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full mb-4">
+                            <i class="ri-user-add-line ri-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Create Your Profile</h3>
+                        <p class="opacity-90">Build a detailed profile showcasing your skills, experience, and availability.</p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-left">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full mb-4">
+                            <i class="ri-calendar-check-line ri-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Get Bookings</h3>
+                        <p class="opacity-90">Receive booking requests from clients looking for your specific skills.</p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-left">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full mb-4">
+                            <i class="ri-money-dollar-circle-line ri-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Earn Money</h3>
+                        <p class="opacity-90">Get paid securely for your services with our easy payment system.</p>
+                    </div>
+                </div>
+                
+                <button class="bg-white text-primary px-8 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-gray-100 transition">Become a Provider</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-3">What Our Users Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Thousands of people have found the perfect service providers through our platform. Here's what they have to say.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"I found an amazing electrician through this platform who fixed my home wiring issues in just a few hours. The booking process was incredibly simple and the service was top-notch!"</p>
+                    <div class="flex items-center">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20portrait%20of%20middle-aged%20woman%2C%20natural%20smile%2C%20neutral%20background%2C%20business%20casual%20attire&width=60&height=60&seq=test1&orientation=squarish" alt="Client" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                        <div>
+                            <h4 class="font-medium text-gray-900">Jennifer Anderson</h4>
+                            <p class="text-sm text-gray-500">Boston, MA</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"As a personal trainer, this platform has helped me connect with new clients and grow my business. The scheduling system makes it easy to manage my appointments and the payment process is seamless."</p>
+                    <div class="flex items-center">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20portrait%20of%20athletic%20young%20man%2C%20confident%20smile%2C%20neutral%20background%2C%20fitness%20attire&width=60&height=60&seq=test2&orientation=squarish" alt="Client" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                        <div>
+                            <h4 class="font-medium text-gray-900">Marcus Thompson</h4>
+                            <p class="text-sm text-gray-500">Denver, CO</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"I hired a gaming buddy to help me improve my skills in Fortnite. Not only did I get better at the game, but I also made a new friend! The platform made it super easy to find someone with the exact skills I was looking for."</p>
+                    <div class="flex items-center">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20portrait%20of%20young%20adult%20man%2C%20casual%20style%2C%20friendly%20smile%2C%20neutral%20background&width=60&height=60&seq=test3&orientation=squarish" alt="Client" class="w-12 h-12 rounded-full object-cover object-top mr-3">
+                        <div>
+                            <h4 class="font-medium text-gray-900">Kevin Richards</h4>
+                            <p class="text-sm text-gray-500">Austin, TX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- App Download -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="bg-gray-900 rounded-2xl overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                        <h2 class="text-3xl font-bold text-white mb-4">Download Our Mobile App</h2>
+                        <p class="text-gray-300 mb-8">Get the full experience on the go. Book services, manage appointments, and connect with providers from anywhere.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="flex items-center bg-black hover:bg-gray-800 text-white px-5 py-3 rounded-lg transition">
+                                <i class="ri-apple-fill ri-lg mr-2"></i>
+                                <div>
+                                    <div class="text-xs">Download on the</div>
+                                    <div class="text-sm font-semibold">App Store</div>
+                                </div>
+                            </a>
+                            <a href="#" class="flex items-center bg-black hover:bg-gray-800 text-white px-5 py-3 rounded-lg transition">
+                                <i class="ri-google-play-fill ri-lg mr-2"></i>
+                                <div>
+                                    <div class="text-xs">Get it on</div>
+                                    <div class="text-sm font-semibold">Google Play</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 relative">
+                        <img src="https://readdy.ai/api/search-image?query=smartphone%20displaying%20service%20booking%20app%20interface%2C%20modern%20UI%20design%2C%20showing%20service%20provider%20listings%20and%20booking%20screen%2C%20high%20quality%20digital%20mockup&width=600&height=500&seq=app1&orientation=portrait" alt="Mobile App" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-3">Stay Updated</h2>
+                <p class="text-gray-600 mb-8">Subscribe to our newsletter to receive updates about new service providers, special offers, and tips.</p>
+                
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" placeholder="Enter your email address" class="flex-grow px-4 py-3 border-none rounded bg-white shadow-sm text-gray-700">
+                    <button class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap hover:bg-indigo-600 transition">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <a href="#" class="text-3xl font-['Pacifico'] text-white mb-4 inline-block">logo</a>
+                    <p class="text-gray-400 mb-4">Connect with skilled service providers for any task, anytime, anywhere.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                            <i class="ri-twitter-x-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Professional Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Personal Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Fun Buddy Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Popular Categories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Service Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Safety Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Community Guidelines</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 SkillHire. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <div class="flex items-center">
+                        <i class="ri-visa-fill ri-lg mr-2"></i>
+                        <i class="ri-mastercard-fill ri-lg mr-2"></i>
+                        <i class="ri-paypal-fill ri-lg mr-2"></i>
+                        <i class="ri-apple-fill ri-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Custom checkbox functionality
+            const checkboxes = document.querySelectorAll('.custom-checkbox input');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Custom checkbox logic here if needed
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle switch functionality
+            const toggles = document.querySelectorAll('.toggle-switch input');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    // Toggle switch logic here if needed
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Range slider functionality
+            const rangeSlider = document.querySelector('input[type="range"]');
+            rangeSlider.addEventListener('input', function() {
+                // Range slider logic here if needed
+            });
+        });
+    </script>
+</body>
+</html>
